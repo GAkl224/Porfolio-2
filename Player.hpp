@@ -10,4 +10,4 @@ private:
     char mark;
 };
 
-#endif // PLAYER_HPP
+#endif 

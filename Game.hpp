@@ -26,4 +26,4 @@ private:
     void switchPlayer();
 };
 
-#endif // GAME_HPP
+#endif 
