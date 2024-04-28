@@ -5,3 +5,5 @@ int main() {
     game.mainMenu();
     return 0;
 }
+
+//to compile: g++ -o tictactoe main.cpp Game.cpp Player.cpp Board.cpp
