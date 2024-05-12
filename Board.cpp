@@ -2,34 +2,41 @@
 
 Board::Board() {
     // Initialize the board
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
             board[i][j] = ' ';
         }
     }
 }
 
 void Board::display() {
-    std::cout << "\n";
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
-            std::cout << " " << board[i][j] << " ";
-            if (j < 2)
-                std::cout << "|";
+     std::cout << "\n";
+    int index = 1;
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            if (board[i][j] == ' ') {
+                std::cout << std::setw(2) << index;
+            } else {
+                std::cout << std::setw(2) << board[i][j];
+            }
+            if (j < 3)
+                std::cout << " | ";
+            index++;
         }
         std::cout << "\n";
-        if (i < 2)
-            std::cout << "---+---+---\n";
+        if (i < 3)
+            std::cout << std::string(19, '-') << "\n";
     }
     std::cout << "\n";
+    
 }
 
 bool Board::placeMark(int cell, char mark) {
-    if (cell < 1 || cell > 9)
+    if (cell < 1 || cell > 16)
         return false;
 
-    int row = (cell - 1) / 3;
-    int col = (cell - 1) % 3;
+    int row = (cell - 1) / 4;
+    int col = (cell - 1) % 4;
 
     if (board[row][col] == ' ') {
         board[row][col] = mark;
@@ -40,28 +47,32 @@ bool Board::placeMark(int cell, char mark) {
 }
 
 char Board::checkWinner() {
-    for (int i = 0; i < 3; ++i) {
-        if (board[i][0] != ' ' && board[i][0] == board[i][1] && board[i][0] == board[i][2])
-            return board[i][0];
-    }
+    //rows
+    for (int i = 0; i < 4; ++i) {
+            if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][2] == board[i][3] && board[i][0] != ' ')
+                return board[i][0];
+        }
 
-    for (int i = 0; i < 3; ++i) {
-        if (board[0][i] != ' ' && board[0][i] == board[1][i] && board[0][i] == board[2][i])
-            return board[0][i];
-    }
+        // Check columns
+        for (int j = 0; j < 4; ++j) {
+            if (board[0][j] == board[1][j] && board[1][j] == board[2][j] && board[2][j] == board[3][j] && board[0][j] != ' ')
+                return board[0][j];
+        }
 
-    if (board[0][0] != ' ' && board[0][0] == board[1][1] && board[0][0] == board[2][2])
-        return board[0][0];
+        // Check diagonals
+        if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[2][2] == board[3][3] && board[0][0] != ' ')
+            return board[0][0];
 
-    if (board[0][2] != ' ' && board[0][2] == board[1][1] && board[0][2] == board[2][0])
-        return board[0][2];
+        if (board[0][3] == board[1][2] && board[1][2] == board[2][1] && board[2][1] == board[3][0] && board[0][3] != ' ')
+            return board[0][3];
 
-    return ' ';
+        // If no winner yet, return space
+        return ' ';
 }
 
 bool Board::isBoardFull() {
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
             if (board[i][j] == ' ')
                 return false;
         }
@@ -70,19 +81,19 @@ bool Board::isBoardFull() {
 }
 
 bool Board::isCellEmpty(int cell){
-    if (cell < 1 || cell > 9)
+    if (cell < 1 || cell > 16)
         return false;
 
-    int row = (cell - 1) / 3;
-    int col = (cell - 1) % 3;
+    int row = (cell - 1) / 4;
+    int col = (cell - 1) % 4;
 
     return (board[row][col] == ' ');
 }
 
 void Board::clearBoard()
 {
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
             board[i][j] = ' ';
         }
     }

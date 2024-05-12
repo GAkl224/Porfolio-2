@@ -1,1 +1,1 @@
-}
+g++ -o tictactoe main.cpp Game.cpp Player.cpp Board.cpp

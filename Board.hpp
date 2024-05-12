@@ -2,6 +2,8 @@
 #define BOARD_HPP
 
 #include <iostream>
+#include <iomanip>
+
 
 class Board {
 public:
@@ -14,7 +16,7 @@ public:
     void clearBoard();
 
 private:
-    char board[3][3];
+    char board[4][4];
 };
 
 #endif 
